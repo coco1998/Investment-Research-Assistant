@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+config.yaml
+workbench/data.js
+workspace/
+!workspace.example/
+*.log
+.privacy_blocklist.local

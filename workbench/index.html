@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investment Research Assistant</title>
+<style>
+:root{--bg:#f4f2ec;--panel:#fff;--panel2:#faf9f5;--ink:#1c2434;--ink2:#4a5568;--muted:#8a94a6;--line:#e6e2d8;--navy:#1f2d4a;--gold:#b8862f;--blue:#2f64b3;--green:#2f7d5b;--red:#a04545;--elev:0 1px 2px rgba(28,36,52,.04),0 5px 22px rgba(28,36,52,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.58}button,input{font:inherit}#app{height:100vh;display:flex;overflow:hidden}.sidebar{width:230px;flex:0 0 230px;background:var(--navy);color:#e8ecf4;padding:22px 14px;display:flex;flex-direction:column}.brand{padding:6px 10px 18px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}.brand h1{font-size:16px;margin:0;color:#fff}.brand p{margin:6px 0 0;font-size:11px;color:#9aa6bd}.nav{display:flex;flex-direction:column;gap:4px}.nav button{border:0;background:transparent;color:#c2cadb;padding:10px 12px;border-radius:9px;text-align:left;cursor:pointer}.nav button:hover,.nav button.active{background:rgba(184,134,47,.2);color:#fff}.side-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.1);padding:12px 8px 0}.refresh{width:100%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:#e8ecf4;border-radius:8px;padding:8px;cursor:pointer}.main{flex:1;min-width:0;padding:26px 34px;overflow:hidden}.view{height:100%;display:none;flex-direction:column;min-height:0}.view.active{display:flex}.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}.head h2{margin:0;font-size:25px}.head p{margin:4px 0 0;color:var(--muted)}.searchbar{display:flex;gap:12px;margin-bottom:16px}.searchbar input{flex:1;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:10px 13px;outline:0}.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 13px;cursor:pointer}.btn.primary{background:var(--blue);border-color:#214f91;color:#fff}.split{flex:1;min-height:0;display:grid;grid-template-columns:var(--left,38%) 8px 1fr}.pane{min-width:0;min-height:0;overflow:auto}.drag{cursor:col-resize;background:transparent;position:relative}.drag:after{content:"";position:absolute;left:3px;top:0;bottom:0;width:2px;background:var(--line)}.cards{display:flex;flex-direction:column;gap:12px;padding-right:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;cursor:pointer}.card.active{border-color:var(--gold);border-left:4px solid var(--gold)}.project-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.project-title h3{margin:0;font-size:22px}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;background:#f5ead3;color:#9a681d}.badge.green{background:#e5f2eb;color:var(--green)}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;background:var(--panel2);color:var(--ink2);font-weight:600}.section{margin-top:22px}.label{font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px}.label:before{content:"";display:inline-block;width:4px;height:14px;background:var(--gold);border-radius:3px;margin-right:9px;vertical-align:-2px}.text{font-size:16px;color:#536078}.report-buttons{display:flex;flex-wrap:wrap;gap:6px}.pill{border:1px solid #d8c7a6;background:#fffdfa;color:#a6731e;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:700;cursor:pointer}.detail{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;min-height:100%;overflow:auto}.empty{color:var(--muted);padding:40px;text-align:center}.md{font-size:16px;color:#263348;max-width:980px}.md h1{font-size:30px;line-height:1.25;margin:0 0 20px}.md h2{font-size:23px;margin:30px 0 12px;border-bottom:1px solid var(--line);padding-bottom:8px}.md h3{font-size:18px;margin:22px 0 10px}.md p{margin:12px 0}.md ul,.md ol{padding-left:1.4em}.md li{margin:7px 0}.md blockquote{margin:16px 0;padding:13px 16px;border-left:4px solid #8fb1e8;background:#eef4fc;color:#536078}.md table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14px}.md th,.md td{border:1px solid #d6dde7;padding:9px 10px;vertical-align:top}.md th{background:#edf2f7;color:#173b70}.md code{background:#f1efe8;border:1px solid #e2ddd0;border-radius:5px;padding:1px 5px}.md pre{background:#182033;color:#eef3ff;border-radius:10px;padding:14px;overflow:auto}.md a{color:#245aa5}.material-group{margin:12px 0 18px}.file-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.file-row a{color:#1f4f91;text-decoration:none}.file-row small{color:var(--muted)}.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.filter{border:1px solid var(--line);border-radius:999px;background:var(--panel);padding:6px 12px;cursor:pointer}.filter.active{background:var(--navy);color:#fff;border-color:var(--navy)}@media(max-width:900px){#app{display:block;overflow:auto;height:auto}.sidebar{width:auto;height:auto}.main{padding:18px}.split{display:block}.drag{display:none}.pane{overflow:visible}.detail{margin-top:14px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside class="sidebar">
+    <div class="brand"><h1>Investment Research Assistant</h1><p>Local DD workspace</p></div>
+    <nav class="nav">
+      <button data-view="pipeline" class="active">项目管线</button>
+      <button data-view="reports">研究报告</button>
+      <button data-view="meetings">会议记录</button>
+      <button data-view="knowledge">知识库</button>
+    </nav>
+    <div class="side-foot"><button class="refresh" id="refreshBtn">刷新数据</button><p id="status"></p></div>
+  </aside>
+  <main class="main">
+    <section id="pipeline" class="view active"></section>
+    <section id="reports" class="view"></section>
+    <section id="meetings" class="view"></section>
+    <section id="knowledge" class="view"></section>
+  </main>
+</div>
+<script src="data.js"></script>
+<script>
+const DATA = window.RESEARCH_DATA || {projects:[],interviews:[],entities:[],concepts:[],stats:{}};
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+let selectedProject = DATA.projects[0]?.name || "";
+let selectedReport = null;
+let selectedMeeting = DATA.interviews[0] || null;
+
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+function fmtSize(n){if(!n)return ""; if(n<1024)return n+" B"; if(n<1048576)return (n/1024).toFixed(1)+" KB"; return (n/1048576).toFixed(1)+" MB"}
+function md(src){
+  let text=String(src||"").replace(/\r\n/g,"\n");
+  text=text.replace(/^---[\s\S]*?\n---\n?/,"");
+  text=text.replace(/\*\*\s+([^*\n][^*]*?)\s+\*\*/g,"**$1**");
+  text=text.replace(/\*\*([^*\n]+)\*\*(?=[\u4e00-\u9fa5A-Za-z0-9])/g,"**$1** ");
+  let lines=text.split("\n"), out=[], inList=false, inCode=false, table=[];
+  function flushList(){if(inList){out.push("</ul>");inList=false}}
+  function flushTable(){if(table.length){out.push("<table>"+table.map((r,i)=>"<tr>"+r.split("|").filter((_,idx,arr)=>!(idx===0||idx===arr.length-1)).map(c=>(i===0?"<th>":"<td>")+inline(c.trim())+(i===0?"</th>":"</td>")).join("")+"</tr>").join("")+"</table>");table=[]}}
+  for(const raw of lines){
+    let line=raw.trimEnd();
+    if(line.startsWith("```")){flushList();flushTable();out.push(inCode?"</code></pre>":"<pre><code>");inCode=!inCode;continue}
+    if(inCode){out.push(esc(line)+"\n");continue}
+    if(/^\|.+\|$/.test(line)){flushList(); if(!/^\|\s*:?-{3,}/.test(line))table.push(line); continue}
+    flushTable();
+    if(!line.trim()){flushList();continue}
+    let h=line.match(/^(#{1,3})\s+(.+)$/); if(h){flushList();out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`);continue}
+    if(line.startsWith(">")){flushList();out.push(`<blockquote>${inline(line.replace(/^>\s?/,""))}</blockquote>`);continue}
+    let li=line.match(/^[-*]\s+(.+)$/); if(li){if(!inList){out.push("<ul>");inList=true}out.push(`<li>${inline(li[1])}</li>`);continue}
+    flushList();out.push(`<p>${inline(line)}</p>`);
+  }
+  flushList();flushTable();
+  return `<div class="md">${out.join("\n")}</div>`;
+}
+function inline(s){return esc(s).replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">图片：$1</a>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/`([^`]+)`/g,'<code>$1</code>')}
+function projectCard(p){return `<article class="card ${p.name===selectedProject?'active':''}" data-project="${esc(p.name)}"><div class="project-title"><h3>${esc(p.name)}</h3>${p.verdict?`<span class="badge green">${esc(p.verdict)}</span>`:""}</div><div class="chips">${(p.track||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div><div class="section"><div class="label">Verdict</div><div class="text">${esc(p.summary||p.verdict||"暂无摘要")}</div></div><div class="section"><div class="label">Stage</div><div class="text">${esc(p.stage||"待推进")} · ${p.reports.length} 份报告 · ${p.meetings.length} 条会议 · ${p.materials.length} 份材料</div></div></article>`}
+function projectDetail(p){
+  if(!p)return `<div class="detail empty">暂无项目</div>`;
+  const groups = Object.groupBy ? Object.groupBy(p.materials, m=>m.category) : p.materials.reduce((a,m)=>((a[m.category]??=[]).push(m),a),{});
+  return `<div class="detail"><div class="project-title"><h3>${esc(p.name)}</h3>${p.verdict?`<span class="badge green">${esc(p.verdict)}</span>`:""}</div>
+  <div class="section"><div class="label">下一步</div><div class="text">${esc(p.next_step||"补充材料，运行下一阶段研究。")}</div></div>
+  <div class="section"><div class="label">做过的工作 · 研究报告 (${p.reports.length})</div><div class="report-buttons">${p.reports.map(r=>`<button class="pill" data-report="${esc(r.path)}">${esc(r.title||r.name)}</button>`).join("")||"<span class='text'>暂无报告</span>"}</div></div>
+  <div class="section"><div class="label">项目材料 (${p.materials.length})</div>${Object.entries(groups).map(([cat,items])=>`<div class="material-group"><b>${esc(cat)}</b>${items.map(f=>`<div class="file-row"><a href="../${esc(f.path)}" target="_blank">${esc(f.file)}</a><small>${esc(f.ext)} · ${fmtSize(f.size)}</small></div>`).join("")}</div>`).join("")||"<div class='text'>暂无材料</div>"}</div>
+  <div class="section"><div class="label">关联会议 · 核心结论 (${p.meetings.length})</div>${p.meetings.slice(0,6).map(m=>`<div class="card" data-meeting="${esc(m.file)}"><b>${esc(m.date)} · ${esc(m.company||m.title)}</b><p>${esc(m.summary||"")}</p></div>`).join("")||"<div class='text'>暂无会议</div>"}</div>
+  ${p.body?`<div class="section"><div class="label">Master</div>${md(p.body)}</div>`:""}</div>`;
+}
+function renderPipeline(){
+  const root=$("#pipeline"); const p=DATA.projects.find(x=>x.name===selectedProject)||DATA.projects[0];
+  root.innerHTML=`<div class="head"><div><h2>项目管线</h2><p>${DATA.projects.length} 个项目 · ${DATA.stats.report_count||0} 份报告 · ${DATA.stats.material_count||0} 份材料</p></div><button class="btn primary">+ 新建项目</button></div><div class="searchbar"><input placeholder="搜索项目、赛道、结论" id="psearch"></div><div class="split" data-split><div class="pane cards">${DATA.projects.map(projectCard).join("")}</div><div class="drag"></div><div class="pane">${projectDetail(p)}</div></div>`;
+}
+function renderReports(){
+  const reports=DATA.projects.flatMap(p=>p.reports.map(r=>({...r,project:p.name})));
+  if(!selectedReport) selectedReport=reports[0]||null;
+  $("#reports").innerHTML=`<div class="head"><div><h2>研究报告</h2><p>按项目聚合的 Markdown 报告</p></div></div><div class="split" data-split><div class="pane cards">${reports.map(r=>`<article class="card ${selectedReport&&selectedReport.path===r.path?'active':''}" data-rpath="${esc(r.path)}"><b>${esc(r.title)}</b><p>${esc(r.project)} · ${esc(r.stage||r.version||"")}</p></article>`).join("")}</div><div class="drag"></div><div class="pane detail">${selectedReport?md(selectedReport.body):"<div class='empty'>暂无报告</div>"}</div></div>`;
+}
+function renderMeetings(){
+  const types=["全部",...new Set(DATA.interviews.map(i=>i.type).filter(Boolean))];
+  $("#meetings").innerHTML=`<div class="head"><div><h2>会议记录</h2><p>管访、专家访谈、路演与股东交流</p></div></div><div class="filters">${types.map((t,i)=>`<button class="filter ${i===0?'active':''}" data-type="${esc(t)}">${esc(t)}</button>`).join("")}</div><div class="split" data-split><div class="pane cards">${DATA.interviews.map(m=>`<article class="card ${selectedMeeting&&selectedMeeting.file===m.file?'active':''}" data-mfile="${esc(m.file)}"><b>${esc(m.date)} · ${esc(m.company||m.title)}</b><p>${esc(m.summary||m.person||"")}</p><div class="chips">${(m.track||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div></article>`).join("")}</div><div class="drag"></div><div class="pane detail">${selectedMeeting?md(selectedMeeting.body):"<div class='empty'>暂无会议</div>"}</div></div>`;
+}
+function renderKnowledge(){
+  const items=[...DATA.entities.map(x=>({...x,k:"实体"})),...DATA.concepts.map(x=>({...x,k:"概念"}))];
+  $("#knowledge").innerHTML=`<div class="head"><div><h2>知识库</h2><p>跨项目实体、概念与行业沉淀</p></div></div><div class="cards">${items.map(x=>`<article class="card"><div class="project-title"><h3>${esc(x.name)}</h3><span class="badge">${esc(x.k)}</span></div><p>${esc(x.summary||"")}</p><div class="chips">${(x.track||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div></article>`).join("")||"<div class='empty'>暂无知识库内容</div>"}</div>`;
+}
+function bind(){
+  $$(".nav button").forEach(b=>b.onclick=()=>{ $$(".nav button").forEach(x=>x.classList.remove("active")); b.classList.add("active"); $$(".view").forEach(v=>v.classList.remove("active")); $("#"+b.dataset.view).classList.add("active");});
+  document.body.onclick=e=>{
+    const pc=e.target.closest("[data-project]"); if(pc){selectedProject=pc.dataset.project;renderPipeline();bind();return}
+    const rp=e.target.closest("[data-report]"); if(rp){const reports=DATA.projects.flatMap(p=>p.reports);selectedReport=reports.find(r=>r.path===rp.dataset.report);renderReports();bind();$(".nav button[data-view='reports']").click();return}
+    const rc=e.target.closest("[data-rpath]"); if(rc){const reports=DATA.projects.flatMap(p=>p.reports);selectedReport=reports.find(r=>r.path===rc.dataset.rpath);renderReports();bind();return}
+    const mc=e.target.closest("[data-mfile]"); if(mc){selectedMeeting=DATA.interviews.find(m=>m.file===mc.dataset.mfile);renderMeetings();bind();return}
+    const mt=e.target.closest("[data-meeting]"); if(mt){selectedMeeting=DATA.interviews.find(m=>m.file===mt.dataset.meeting);renderMeetings();bind();$(".nav button[data-view='meetings']").click();return}
+  };
+  $$("[data-split]").forEach(split=>{const drag=$(".drag",split); if(!drag)return; let on=false; drag.onmousedown=()=>{on=true;document.body.style.cursor="col-resize"}; window.addEventListener("mouseup",()=>{on=false;document.body.style.cursor=""}); window.addEventListener("mousemove",ev=>{if(!on)return; const r=split.getBoundingClientRect(); const pct=Math.min(70,Math.max(25,((ev.clientX-r.left)/r.width)*100)); split.style.setProperty("--left",pct+"%")})});
+}
+$("#refreshBtn").onclick=async()=>{ $("#status").textContent="刷新中..."; try{const r=await fetch("/api/refresh",{method:"POST"}); const j=await r.json(); $("#status").textContent=j.ok?"已刷新，重新加载中":"刷新失败"; if(j.ok) location.reload();}catch(e){$("#status").textContent="当前为 file:// 模式，请用 python3 workbench/serve.py 启动"}};
+renderPipeline();renderReports();renderMeetings();renderKnowledge();bind();
+</script>
+</body>
+</html>

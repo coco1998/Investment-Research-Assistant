@@ -1,0 +1,12 @@
+# Investment Research Assistant config
+
+workspace_root: ./workspace
+
+workbench:
+  port: 8765
+  bind: 127.0.0.1
+
+agent:
+  default_language: zh-CN
+  output_style: investment_memo
+  require_source_labels: true
